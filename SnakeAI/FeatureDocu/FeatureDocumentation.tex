@@ -1,0 +1,57 @@
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+
+%% Sets page size and margins
+\usepackage{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=black]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{float}
+
+\geometry{a4paper,left=3cm, right=3cm, top=3cm, bottom=3cm}
+\pagestyle{fancy}
+\fancyhead[L]{Teamprojekt: SnakeKI}
+\fancyhead[C]{~~~~~~~~~~~~~~~~~~Feature Dokumentation}
+\fancyhead[R]{\today}
+\fancyfoot[L]{}
+\fancyfoot[C]{Seite \thepage /\pageref{LastPage}}
+\fancyfoot[R]{Julia Hofmann, Marco Piechotta}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\parindent0pt
+
+\begin{document}
+\tableofcontents
+\section{Feature 1: Richtungswechsel durch Kopf mit Schwanz vertauschen}
+Um dieses Feature verwenden zu können haben wir uns am Wall-Feature orientiert, da das ja bereits drin ist und läuft.
+Damit man sich dann auch nicht großartig viel neues anschauen muss, gibt es genau die gleichen
+Funktionen für das WallFeature auch für dieses Feature.
+\\
+Um das Feature auf dem Spielfeld zu suchen, verwendet man den hinzugefügten CellType: \textbf{CHANGEHEADTAIL}\\
+ob auf dem Spielfeld das Item ist, kann man über das field herausfinden über \textbf{field.hasChangeHeadTail();}\\
+\section{Feature 2: Schlangentausch}
+Hier werden \textbf{nur} die Schlangensegmente vertauscht. Das heißt die Punkte bleiben der
+Schlange erhalten.\\
+Verwendung wie beim Richtungswechsel. Der CellType hierfür heißt: \textbf{CHANGESNAKE}
+die Methode, die zurück gibt ob das Feature auf dem Feld zu finden ist heißt:
+\textbf{field.hasChangeSnake();}\\
+
+\section{Zusätzliche Änderungen}
+Wir haben auch versucht etwas den Einbau neuer Features zu erleichtern indem wir statt mehrere boolean Variablen usw. jeweils Arrays gemacht haben. Sollte man ein neues Feature einführen wollen sollte dieses Array vergrößert werden statt neue Variablen einzuführen für z.B.:\\
+\begin{itemize}
+\item probability wann das Feature erscheint
+\item aktive Features abfragen
+\end{itemize}
+
+
+\end{document}}

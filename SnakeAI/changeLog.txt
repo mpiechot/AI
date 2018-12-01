@@ -1,0 +1,37 @@
+changeLog:
+Field: 
+-EnumTypes ChangeSnake und ChangeHeadTail eingefügt
+-booleanArray für aktive Features eingefügt und entsprechend die Methoden
+//0 = featureWall , 1 = changeSnake , 2 = changeHeadTail , 3 = isPortalActive
+setFeatureWall, removeFeatureWall und hasFeatureWall verändert.
+-toString Methode verändert um neue Items anzuzeigen
+-getter und setter Methoden eingefügt für neue Features
+-import java.util.Arrays; entfernt da keine verwendung
+
+Game:
+-double Array als Übergabeparameter für den Game Konstruktor eingefüt.
+Index Belegung:
+0 = apple , 1 = featureWall , 2 = changeSnake , 3 = changeHeadTail
+-double Array als Klassenvariable hinzugefügt um alle probabilitys zu speichern
+-main Methode geändert um den Konstruktor mit probability-Array zu verwenden
+-nextStep probability-Array verwendet
+-nextStep neue Features setzen eingefügt
+-nextStep update the field in switch-case umgewandelt und Logik hinzugefügt um
+Kopf und Schwanz zu vertauschen bzw. die Schlangen zu tauschen
+
+Snake:
+-switchHeadTail funktion hinzugefügt um Featrue auszuführen
+-setSegments Methode hinzugefügt um den SchlangenTausch zu realisieren
+
+MainWindow:
+-startMethode angepasst für Game Konstruktor mit probability-Array
+-gameUpdate drawing für Features eingefügt
+-Package "res" eingefügt für Ressourcen -> Images
+-Ein paar Bilder eingefügt.
+Für eigene Bilder:
+-> Bild in den res Ordner legen (Das Bild sollte 30x30Pixel groß sein)
+-> in MainWindow dann eine Klassenvariable wie appleImg anlegen (den Pfad aber entsprechend ändern ^^')
+-> ganz unten bei beim zeichnen des Spielfelds dann gc.drawImage(image,x,y); verwenden.
+
+-Alternative für Apfel eingefügt -> Rubin ^^'
+-Bild für Apfel eingestellt.
