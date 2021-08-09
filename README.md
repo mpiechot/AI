@@ -53,72 +53,71 @@ private double getScore(UnitType type, ClientRoundState roundState)
   switch(type)
   {
     case WARRIOR:
-    if(UnitMovement.enemyUnitPos.size() >0)
-    {
-      score -= UnitMovement.stayCounter*150;
+      if(UnitMovement.enemyUnitPos.size() >0)
+      {
+        score -= UnitMovement.stayCounter*150;
 
-      //Decide on the count of enemy units if we need more warriors
-      if(myUnits.get(UnitType.WARRIOR).size() < UnitMovement.enemyUnitPos.get(UnitType.WARRIOR).size()){
-				if(myUnits.get(UnitType.WARRIOR).size()<=4)
-					score += 300;
-			}
-			else{
-				score -= 200;
-			}
+        //Decide on the count of enemy units if we need more warriors
+        if(myUnits.get(UnitType.WARRIOR).size() < UnitMovement.enemyUnitPos.get(UnitType.WARRIOR).size()){
+          if(myUnits.get(UnitType.WARRIOR).size()<=4)
+          score += 300;
+        }
+        else{
+          score -= 200;
+        }
 
-      //if there aren't any enemies left, we dont need more warriors so reduce the score!
-			if(noEnemys())
-				score -= 300;
+        //if there aren't any enemies left, we dont need more warriors so reduce the score!
+        if(noEnemys())
+          score -= 300;
 
-      //warriors are good in defeating collectors, so build warriors if there are enemy collectors
-			if(!UnitMovement.enemyUnitPos.get(UnitType.COLLECTOR).isEmpty())
-				score += UnitMovement.enemyUnitPos.get(UnitType.COLLECTOR).size()*80;
+        //warriors are good in defeating collectors, so build warriors if there are enemy collectors
+        if(!UnitMovement.enemyUnitPos.get(UnitType.COLLECTOR).isEmpty())
+          score += UnitMovement.enemyUnitPos.get(UnitType.COLLECTOR).size()*80;
 
-      //warriros are bad in defeating archers, so build less if there are any enemy archers
-			if(!UnitMovement.enemyUnitPos.get(UnitType.ARCHER).isEmpty())
-				score -= UnitMovement.enemyUnitPos.get(UnitType.ARCHER).size()*170;
+        //warriros are bad in defeating archers, so build less if there are any enemy archers
+        if(!UnitMovement.enemyUnitPos.get(UnitType.ARCHER).isEmpty())
+          score -= UnitMovement.enemyUnitPos.get(UnitType.ARCHER).size()*170;
+      }
+      break;
+    case ARCHER:
+      if(UnitMovement.enemyUnitPos.size() >0)
+      {
+        score += UnitMovement.stayCounter*150;
+        if(myUnits.get(UnitType.WARRIOR).size() < UnitMovement.enemyUnitPos.get(UnitType.WARRIOR).size())
+          score -= 100;
+        else
+          score += 300;
+        if(noEnemys())
+          score -= 300;
+        if(!UnitMovement.enemyUnitPos.get(UnitType.COLLECTOR).isEmpty())
+          score += UnitMovement.enemyUnitPos.get(UnitType.COLLECTOR).size()*30;
+        if(!UnitMovement.enemyUnitPos.get(UnitType.WARRIOR).isEmpty())
+          score += UnitMovement.enemyUnitPos.get(UnitType.WARRIOR).size()*208;
+        if(!UnitMovement.enemyUnitPos.get(UnitType.ARCHER).isEmpty())
+          score += UnitMovement.enemyUnitPos.get(UnitType.ARCHER).size()*310;
+      }
+      break;
+    case COLLECTOR:
+      if(noEnemys())
+        score += 700;
+      else if(ownUnitCount > 12)
+        score -= 30;
 
-		}
-		break;
-	case ARCHER:
-		if(UnitMovement.enemyUnitPos.size() >0)
-		{
-			score += UnitMovement.stayCounter*150;
-			if(myUnits.get(UnitType.WARRIOR).size() < UnitMovement.enemyUnitPos.get(UnitType.WARRIOR).size())
-				score -= 100;
-			else
-				score += 300;
-			if(noEnemys())
-				score -= 300;
-				if(!UnitMovement.enemyUnitPos.get(UnitType.COLLECTOR).isEmpty())
-					score += UnitMovement.enemyUnitPos.get(UnitType.COLLECTOR).size()*30;
-				if(!UnitMovement.enemyUnitPos.get(UnitType.WARRIOR).isEmpty())
-					score += UnitMovement.enemyUnitPos.get(UnitType.WARRIOR).size()*208;
-				if(!UnitMovement.enemyUnitPos.get(UnitType.ARCHER).isEmpty())
-					score += UnitMovement.enemyUnitPos.get(UnitType.ARCHER).size()*310;
-			}
-			break;
-		case COLLECTOR:
-			if(noEnemys())
-				score += 700;
-			else if(ownUnitCount > 12)
-				score -= 30;
+      if(myUnits.get(UnitType.COLLECTOR).size() < UnitMovement.enemyUnitPos.get(UnitType.COLLECTOR).size())
+        score += 591;
 
-			if(myUnits.get(UnitType.COLLECTOR).size() < UnitMovement.enemyUnitPos.get(UnitType.COLLECTOR).size())
-				score += 591;
+      if(!UnitMovement.enemyUnitPos.get(UnitType.WARRIOR).isEmpty())
+        score -= UnitMovement.enemyUnitPos.get(UnitType.WARRIOR).size()*90;
 
-			if(!UnitMovement.enemyUnitPos.get(UnitType.WARRIOR).isEmpty())
-				score -= UnitMovement.enemyUnitPos.get(UnitType.WARRIOR).size()*90;
-
-			if(!UnitMovement.enemyUnitPos.get(UnitType.ARCHER).isEmpty())
-				score -= UnitMovement.enemyUnitPos.get(UnitType.ARCHER).size()*100;
+      if(!UnitMovement.enemyUnitPos.get(UnitType.ARCHER).isEmpty())
+        score -= UnitMovement.enemyUnitPos.get(UnitType.ARCHER).size()*100;
 
       //To get ressources we need at least 4 Collectors!
-			if(myUnits.get(UnitType.COLLECTOR).size() < 4)
-				score += 591;
+      if(myUnits.get(UnitType.COLLECTOR).size() < 4)
+        score += 591;
 
-			break;
-		}
-		return score;
-	}
+      break;
+  }
+  return score;
+}
 ```
