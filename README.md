@@ -48,48 +48,48 @@ This project was a competition in writing a AI for a strategy game. It was held 
 For the unit creation I tried a more dynamic way by observing the current state of the gamefield and by calculating different scores decide which unit to build. This function looks like this:
 ```java
 private double getScore(UnitType type, ClientRoundState roundState)
-	{
-		double score = 0;
-		switch(type)
-		{
-		case WARRIOR:
-			if(UnitMovement.enemyUnitPos.size() >0)
-			{
-				score -= UnitMovement.stayCounter*150;
+{
+  double score = 0;
+  switch(type)
+  {
+    case WARRIOR:
+    if(UnitMovement.enemyUnitPos.size() >0)
+    {
+      score -= UnitMovement.stayCounter*150;
 
-        //Decide on the count of enemy units if we need more warriors
-				if(myUnits.get(UnitType.WARRIOR).size() < UnitMovement.enemyUnitPos.get(UnitType.WARRIOR).size()){
-					if(myUnits.get(UnitType.WARRIOR).size()<=4)
-						score += 300;
-				}
-				else{
-					score -= 200;
-				}
-
-        //if there aren't any enemies left, we dont need more warriors so reduce the score!
-				if(noEnemys())
-					score -= 300;
-
-        //warriors are good in defeating collectors, so build warriors if there are enemy collectors
-				if(!UnitMovement.enemyUnitPos.get(UnitType.COLLECTOR).isEmpty())
-					score += UnitMovement.enemyUnitPos.get(UnitType.COLLECTOR).size()*80;
-
-        //warriros are bad in defeating archers, so build less if there are any enemy archers
-				if(!UnitMovement.enemyUnitPos.get(UnitType.ARCHER).isEmpty())
-					score -= UnitMovement.enemyUnitPos.get(UnitType.ARCHER).size()*170;
-
-			}
-			break;
-		case ARCHER:
-			if(UnitMovement.enemyUnitPos.size() >0)
-			{
-				score += UnitMovement.stayCounter*150;
-				if(myUnits.get(UnitType.WARRIOR).size() < UnitMovement.enemyUnitPos.get(UnitType.WARRIOR).size())
-					score -= 100;
-				else
+      //Decide on the count of enemy units if we need more warriors
+      if(myUnits.get(UnitType.WARRIOR).size() < UnitMovement.enemyUnitPos.get(UnitType.WARRIOR).size()){
+				if(myUnits.get(UnitType.WARRIOR).size()<=4)
 					score += 300;
-				if(noEnemys())
-					score -= 300;
+			}
+			else{
+				score -= 200;
+			}
+
+      //if there aren't any enemies left, we dont need more warriors so reduce the score!
+			if(noEnemys())
+				score -= 300;
+
+      //warriors are good in defeating collectors, so build warriors if there are enemy collectors
+			if(!UnitMovement.enemyUnitPos.get(UnitType.COLLECTOR).isEmpty())
+				score += UnitMovement.enemyUnitPos.get(UnitType.COLLECTOR).size()*80;
+
+      //warriros are bad in defeating archers, so build less if there are any enemy archers
+			if(!UnitMovement.enemyUnitPos.get(UnitType.ARCHER).isEmpty())
+				score -= UnitMovement.enemyUnitPos.get(UnitType.ARCHER).size()*170;
+
+		}
+		break;
+	case ARCHER:
+		if(UnitMovement.enemyUnitPos.size() >0)
+		{
+			score += UnitMovement.stayCounter*150;
+			if(myUnits.get(UnitType.WARRIOR).size() < UnitMovement.enemyUnitPos.get(UnitType.WARRIOR).size())
+				score -= 100;
+			else
+				score += 300;
+			if(noEnemys())
+				score -= 300;
 				if(!UnitMovement.enemyUnitPos.get(UnitType.COLLECTOR).isEmpty())
 					score += UnitMovement.enemyUnitPos.get(UnitType.COLLECTOR).size()*30;
 				if(!UnitMovement.enemyUnitPos.get(UnitType.WARRIOR).isEmpty())
